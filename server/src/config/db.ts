@@ -28,4 +28,13 @@ const closeDatabase = async () => {
   }
 };
 
-export { connectDB, clearDatabase, closeDatabase };
+const dropDatabase = async () => {
+  try {
+    await connection.dropDatabase();
+    console.log("MongoDB database dropped.");
+  } catch (error) {
+    console.error(`Error dropping database: ${error.message}`);
+  }
+};
+
+export { connectDB, clearDatabase, closeDatabase, dropDatabase };

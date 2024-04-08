@@ -2,7 +2,7 @@ import request from "supertest";
 import express, { Express } from "express";
 import { initApp } from "../app";
 import { MongoMemoryServer } from "mongodb-memory-server";
-import { clearDatabase, closeDatabase } from "../config/db";
+import { clearDatabase, closeDatabase, dropDatabase } from "../config/db";
 import { Types } from "mongoose";
 
 import Todo from "../model/Todo";
