@@ -33,6 +33,7 @@ afterEach(async () => {
  * Remove and close the db and server.
  */
 afterAll(async () => {
+  await dropDatabase();
   await closeDatabase();
 });
 
