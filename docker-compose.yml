@@ -1,0 +1,40 @@
+version: "3.8"
+services:
+  mongodb:
+    image: mongo:7.0.8
+    # ports:
+    #   - "27017:27017"
+    networks:
+      - todo-app
+
+  server:
+    build:
+      context: ./server
+      dockerfile: Dockerfile.dev
+    environment:
+      - PORT=8000
+      - MONGO_URI=mongodb://mongodb/todo
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongodb
+    volumes:
+      - ./server/src:/app/src
+    networks:
+      - todo-app
+  
+  ui:
+    build:
+      context: ./ui
+      args:
+        VITE_API_URL: http://localhost:8000/api/v1
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80"
+    depends_on:
+      - server
+    networks:
+      - todo-app
+
+networks:
+  todo-app:
